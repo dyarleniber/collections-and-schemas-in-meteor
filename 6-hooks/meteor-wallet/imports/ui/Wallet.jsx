@@ -34,12 +34,12 @@ export const Wallet = () => {
       },
       (errorResponse) => {
         if (errorResponse) {
-          if (errorResponse.error) {
-            setErrorMessage(errorResponse.error);
-          } else {
-            errorResponse.details?.forEach((error) => {
+          if (errorResponse.details) {
+            errorResponse.details.forEach((error) => {
               setErrorMessage(error.message);
             });
+          } else {
+            setErrorMessage(errorResponse.error);
           }
         } else {
           setOpen(false);

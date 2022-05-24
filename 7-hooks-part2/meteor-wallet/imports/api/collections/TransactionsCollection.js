@@ -7,10 +7,7 @@ export const ADD_TYPE = "ADD";
 
 export const TransactionsCollection = new Mongo.Collection("transactions");
 
-TransactionsCollection.before.insert(function (
-  transactionId,
-  transactionDocument
-) {
+TransactionsCollection.before.insert(function (userId, transactionDocument) {
   if (transactionDocument.type === TRANSFER_TYPE) {
     // We could also check here if destination wallet exists
     const sourceWallet = WalletsCollection.findOne(
